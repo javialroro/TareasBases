@@ -65,7 +65,7 @@ class Database {
     async updateTask(request_json) {
         try {
             const res = await this.client.query('UPDATE tasks SET title = $1, description = $2, status = $3 , due_date = $4 WHERE id = $5 RETURNING *', [request_json.title, request_json.description, request_json.status, request_json.due_date, request_json.id]);
-            return res.rows[0];
+            return res.rows;
         } catch (e) {
             console.error(`Failed to update task ${e}`);
         }
@@ -74,7 +74,7 @@ class Database {
     async deleteTask(id) {
         try {
             const res = await this.client.query('DELETE FROM tasks WHERE id = $1', [id]);
-            return res;
+            return id;
         } catch (e) {
             console.error(`Failed to delete task ${e}`);
         }

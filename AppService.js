@@ -30,9 +30,9 @@ class AppService {
         }
     }
 
-    async updateTask(request_json) {
+    async updateTask(request_json, id) {
         try{
-            return await this.database.updateTask(request_json);
+            return await this.database.updateTask(request_json, id);
         }
         catch(e){
             console.error(`Failed to update task ${e}`);
