@@ -1,5 +1,4 @@
 const express = require('express');
-const os = require('os');
 const {Database} = require('./db.js');
 const {AppService} = require('./AppService.js');
 
@@ -54,3 +53,5 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
+module.exports = db; // Exportar la db para las pruebas
+module.exports = app; // Exportar la aplicación para las pruebas

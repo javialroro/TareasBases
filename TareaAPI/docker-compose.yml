@@ -30,6 +30,23 @@ services:
     ports:
       - 5432:5432
 
+  test:
+    build: .
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: tasks
+      DB_USER: postgres
+      DB_PASSWORD: mysecretpassword
+    networks:
+      - web
+    volumes:
+      - .:/usr/src/app
+    command: npm test
+    depends_on:
+      - db
+      - app
+
 networks:
   web:
     driver: bridge

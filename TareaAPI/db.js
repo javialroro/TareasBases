@@ -14,7 +14,6 @@ class Database {
             password: this.password,
             port: this.port,
         });
-        this.connect(); 
     }
 
     async connect() {
