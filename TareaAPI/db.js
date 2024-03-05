@@ -14,12 +14,12 @@ class Database {
             password: this.password,
             port: this.port,
         });
+        this.connect();
     }
 
     async connect() {
         try {
             await this.client.connect();
-            console.log('Connected to the database');
         } catch (e) {
             console.error(`Failed to connect ${e}`);
         }
