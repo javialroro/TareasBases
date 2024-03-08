@@ -64,11 +64,30 @@ class Database {
     async updateTask(request_json) {
         try {
             const res = await this.client.query('UPDATE tasks SET title = $1, description = $2, status = $3 , due_date = $4 WHERE id = $5 RETURNING *', [request_json.title, request_json.description, request_json.status, request_json.due_date, request_json.id]);
-            return res.rows;
+            return res.rows[0];
         } catch (e) {
             console.error(`Failed to update task ${e}`);
         }
     }
+
+    async verifyUser(id) {
+        try {
+            const res = await this.client.query('SELECT * FROM users WHERE id = $1', [id]);
+            // Verificar si se encontró algún usuario con el ID dado
+            if (res.rows.length > 0) {
+                // Si hay al menos un resultado, el usuario existe
+                return true;
+            } else {
+                // Si no se encontró ningún resultado, el usuario no existe
+                return false;
+            }
+        } catch (e) {
+            console.error(`Failed to get user by id ${e}`);
+            // En caso de error, también puedes retornar false
+            return false;
+        }
+    }
+    
 
     async deleteTask(id) {
         try {
