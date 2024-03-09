@@ -97,6 +97,28 @@ class Database {
             console.error(`Failed to delete task ${e}`);
         }
     }
+
+    async getUserbyName(username){
+        try{
+            const res = await this.client.query('SELECT * FROM users WHERE name = $1', [username]);
+            return res.rows[0];
+        }
+        catch (e) {
+            console.error(`Failed to get username ${e}`);
+        }
+    }
+
+    async createUserdb(user,password){
+        try {
+            const res = await this.client.query('INSERT INTO users (name, password) VALUES ($1, $2)', [user, password]);
+            return res.rows[0];
+        }
+        catch (e) {
+            console.error(`Failed to get username ${e}`);
+        }
+    }
+
+    
 }
 
 module.exports.Database = Database;

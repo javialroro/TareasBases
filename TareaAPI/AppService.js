@@ -47,6 +47,28 @@ class AppService {
             console.error(`Failed to delete task ${e}`);
         }
     }
+
+    async getUserByUsername(username) {
+        // Implementa la lógica para consultar la base de datos y obtener el usuario por su nombre de usuario
+        // Por ejemplo, utilizando un método de consulta SQL
+        try {
+            return await this.database.getUserbyName(username); // Devuelve el primer usuario encontrado con ese nombre de usuario
+        } catch (error) {
+            console.error('Error al obtener el usuario por nombre de usuario:', error);
+            throw error;
+        }
+    }
+
+    async createUser(user,password){
+        try {
+            return await this.database.createUserdb(user, password);// Devuelve el primer usuario encontrado con ese nombre de usuario
+        } catch (error) {
+            console.error('Error al obtener el usuario por nombre de usuario:', error);
+            throw error;
+        }
+    }
+
+
 }
 
 module.exports.AppService = AppService;

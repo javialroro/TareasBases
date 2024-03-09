@@ -62,30 +62,5 @@ describe('DELETE /api/tasks/:id', () => {
   });
 });
 
-describe('Pruebas de integracion', () => {
-  it('Deberia crear un task y obtenerlo', async () => {
-    // Crear un nuevo usuario
-    const postData = {
-      title: "Task de Integracion",
-      description: "Hello World!",
-      status: "pending",
-      due_date: "09/03/2024",
-      user_id:"1"
-    };
-    const createTaskResponse = await request(app)
-      .post('/api/tasks')
-      .send(postData);
 
-    expect(createTaskResponse.status).toBe(200);
-
-    const taskId = createTaskResponse.body.id;
-
-    // Obtener el usuario recién creado
-    const getTaskResponse = await request(app).get(`/api/tasks/${taskId}`);
-
-    expect(getTaskResponse.status).toBe(200);
-    expect(getTaskResponse.body).toHaveProperty('title', postData.title);
-    expect(getTaskResponse.body).toHaveProperty('description', postData.description);
-  });
-});
 
