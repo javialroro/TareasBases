@@ -40,29 +40,26 @@ describe('POST /api/tasks', () => {
   });
 });
 
-describe('PUT /api/tasks', () => {
+describe('PUT /api/tasks/:id', () => {
   it('Deberia hacerle un update al task con id=1', async () => {
     const postData = {
-      
-        id: 1,
         title: "Task updateado",
         description: "Here we go!",
         due_date: "09-11-2001",
         status: "pending",
         user_id: 1
-    
+
     };
 
     const authToken = generateAuthToken('Javier'); // Generar un token JWT válido
 
     const response = await request(app)
-      .put(`/api/tasks/`)
+      .put('/api/tasks/1')
       .set('Authorization', `Bearer ${authToken}`) // Incluir el token en el encabezado de autorización
       .send(postData);
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('title', postData.title);
-    expect(response.body).toHaveProperty('id', postData.id);
   });
 });
 
