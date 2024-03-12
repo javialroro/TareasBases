@@ -61,9 +61,9 @@ class Database {
         }
     }
 
-    async updateTask(request_json) {
+    async updateTask(request_json, id) {
         try {
-            const res = await this.client.query('UPDATE tasks SET title = $1, description = $2, status = $3 , due_date = $4 WHERE id = $5 RETURNING *', [request_json.title, request_json.description, request_json.status, request_json.due_date, request_json.id]);
+            const res = await this.client.query('UPDATE tasks SET title = $1, description = $2, status = $3 , due_date = $4 WHERE id = $5 RETURNING *', [request_json.title, request_json.description, request_json.status, request_json.due_date, id]);
             return res.rows[0];
         } catch (e) {
             console.error(`Failed to update task ${e}`);

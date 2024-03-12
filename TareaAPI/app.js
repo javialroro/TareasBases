@@ -38,8 +38,8 @@ app.post('/api/tasks', authenticateToken, async (req, res) => {
     res.send(task);
 });
 
-app.put('/api/tasks', authenticateToken, async (req, res) => {
-    const task = await appService.updateTask(req.body);
+app.put('/api/tasks/:id', authenticateToken, async (req, res) => {
+    const task = await appService.updateTask(req.body,req.params.id);
     res.send(task);
 });
 
