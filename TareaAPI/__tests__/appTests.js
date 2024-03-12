@@ -16,6 +16,26 @@ describe('GET /', () => {
   });
 });
 
+describe('GET /api/tasks', () => {
+  it('Deberia retornar las tareas', async () => {
+    const authToken = generateAuthToken('Javier'); // Generar un token JWT válido
+    
+    const response = await request(app).get('/api/tasks')
+    .set('Authorization', `Bearer ${authToken}`); // Incluir el token en el encabezado de autorización
+    expect(response.status).toBe(200); // Estado de respuesta OK
+  });
+});
+
+describe('GET /api/tasks/:id', () => {
+  it('Deberia retornar la tarea con id=1', async () => {
+    const authToken = generateAuthToken('Javier'); // Generar un token JWT válido
+    const response = await request(app).get('/api/tasks/1')
+    .set('Authorization', `Bearer ${authToken}`); // Incluir el token en el encabezado de autorización
+    expect(response.status).toBe(200); // Estado de respuesta OK
+    expect(response.body).toHaveProperty('id', 1);
+  });
+});
+
 describe('POST /api/tasks', () => {
   it('Deberia crear una nueva task', async () => {
     const postData = {
